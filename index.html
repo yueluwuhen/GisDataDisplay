@@ -1,159 +1,342 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>echarts水质监测数据可视化模板 www.bootstrapmb.com</title>
+    <title>万达信息政务标准化受办理系统大数据展示</title>
     <link rel="stylesheet" href="css/index.css">
-
+    <link rel="stylesheet" href="ol/ol.css">
+    <link rel="stylesheet" href="ol/ol-ext.css" />
 </head>
+
 <body>
 
-<div class="content-body">
-    <div class="header">
-        <div class="header-left">
-            <span>水质情况实时监测预警系统</span>
-        </div>
-        <div class="header-time">
-            <span id="time"></span>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="content-con">
-            <div class="left-body">
-                <div class="left-top public-bg">
-                    <div class="public-title">重点水质量检测区</div>
-                    <div class="top-body">
-                        <div class="top-left">
-                            <div class="top-left-title">
-                                <h6>注水量</h6>
-                                <span><b>1756</b>m3/h</span>
-                                <img src="image/pictre.png" alt="">
-                            </div>
-
-                        </div>
-                        <div class="top-right">
-                            <div class="top-left-title">
-                                <h6>泄水量</h6>
-                                <span><b>3520</b>m3/h</span>
-                                <img src="image/pictre.png" alt="">
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="left-con public-bg">
-                    <div class="public-title">水质量分布情况</div>
-                    <div class="title-nav" id="leida"></div>
-                </div>
-                <div class="left-bottom public-bg">
-                    <div class="public-title">企业污染排放情况</div>
-                    <div class="title-nav" id="wuran"></div>
-                </div>
+    <div class="content-body">
+        <div class="header">
+            <div class="header-left">
+                <span>万达信息政务标准化受办理系统大数据展示</span>
             </div>
-
-            <div class="center-body">
-                <div class="map" id="map"></div>
+            <div class="header-time">
+                <span id="time"></span>
             </div>
+        </div>
 
-            <div class="right-body">
-                <div class="right-top public-bg">
-                    <div class="public-title">水质污染TOP5</div>
-                    <div class="title-nav">
-                        <div class="top5-ul">
-                            <ul>
-                                <li>
-                                    <span>1</span>
-                                    <span>严重</span>
-                                    <span>北京市</span>
-                                    <span>房山区</span>
-                                    <span>重度污染</span>
-                                    <span>15公里</span>
-                                </li>
-                                <li>
-                                    <span>2</span>
-                                    <span>严重</span>
-                                    <span>上海市</span>
-                                    <span>闵行区</span>
-                                    <span>重度污染</span>
-                                    <span>10公里</span>
-                                </li>
-                                <li>
-                                    <span>3</span>
-                                    <span>严重</span>
-                                    <span>北京市</span>
-                                    <span>朝阳区</span>
-                                    <span>重度污染</span>
-                                    <span>9.3公里</span>
-                                </li>
-                                <li>
-                                    <span>4</span>
-                                    <span>中度</span>
-                                    <span>广东省</span>
-                                    <span>广州市</span>
-                                    <span>中度污染</span>
-                                    <span>8.6公里</span>
-                                </li>
-                                <li>
-                                    <span>5</span>
-                                    <span>中度</span>
-                                    <span>浙江省</span>
-                                    <span>杭州市</span>
-                                    <span>中度污染</span>
-                                    <span>6.6公里</span>
-                                </li>
-                            </ul>
+        <div class="content">
+            <div class="content-con">
+                <div class="left-body">
+                    <div class="left-top public-bg">
+                        <div class="public-title">全国政务大厅分布</div>
+                        <div class="title-nav">
+                            <div class="top5-ul">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="right-con public-bg">
-                    <div class="public-title">水质类别占比</div>
-                    <div class="title-nav" id="huaxing"></div>
+
+                <div class="center-body">
+                    <div class="map" id="map"></div>
                 </div>
-                <div class="right-bottom public-bg">
-                    <div class="public-title">主要地区水流量</div>
-                    <div class="title-nav" id="zhexian"></div>
+
+                <div class="right-body">
+                    <div class="right-top public-bg">
+                        <div class="public-title">政务大厅列表</div>
+                        <div class="title-nav">
+                            <div class="top5-ul">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>
 
-<script src="js/echarts.min.js"></script>
+<!-- <script src="js/echarts.min.js"></script> -->
 <script src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/china.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<!-- <script type="text/javascript" src="js/china.js"></script> -->
+<!-- <script type="text/javascript" src="js/index.js"></script> -->
+<script src="ol/ol.js"></script>
+<!-- <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script> -->
+<script type="text/javascript" src="ol/ol-ext.js"></script>
+<script src="data/data.js"></script>
+<script>
+    var map;
+    initMap();
+    loadAllZwdtCount();
+    loadZwzxData();
+    loadAllZwdt("REGION_NATION.23");
+    function loadZwzxData() {
+        var styleNation = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: '#1EE0FF',
+                width: 1
+            }),
+            //把点的样式换成ICON图标
+            fill: new ol.style.Fill({
+                //填充颜色
+                color: '#0D2B55'
+            }),
+            image: new ol.style.Icon(/** @type {olx.style.IconOptions} **/({
+                    anchor:[0.5, 0.96],
+                    src: "image/location.png", //图片路径
+                    imgSize: undefined
+            })),
+            text: new ol.style.Text({
+                // 字体与大小
+                font: '13px Microsoft YaHei',
+                //文字填充色
+                fill: new ol.style.Fill({
+                    color: '#fff'
+                }),
+                //文字边界宽度与颜色
+                stroke: new ol.style.Stroke({
+                    color: '#000',
+                    width: 3
+                })
+            })
+        });
 
+       //创建矢量图层-政务大厅
+       var dtLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'http://192.168.0.252:8090/geoserver/core/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=core%3AWINDOW_LOCATION&maxFeatures=50&outputFormat=application%2Fjson',
+                format: new ol.format.GeoJSON(),
+            }),           
+            style: function (feature, resolution) {
+                console.log(feature.values_);
+                //styleNation.getText().setText(feature.values_.ST_AREA_NM);  //当放大到1:5000分辨率时，显示国家名字
+                return [styleNation];
+            }
+        });
+        map.addLayer(dtLayer);
+    }
+
+    function initMap() {
+        var osmLayer = new ol.layer.Tile({
+            source: new ol.source.OSM()
+        });
+
+        var centerPoint = ol.proj.transform([107.66, 36.1], "EPSG:4326", "EPSG:3857");
+
+        //地图视图
+        var view = new ol.View({
+            center: centerPoint,
+            zoom: 5
+        });
+
+        var styleBase = [
+            new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: '#1A5097',
+                    width: 10,
+                    shadow: 10
+                }),
+                fill: new ol.style.Fill({
+                    color: '#314E7A'
+                })
+            })
+        ];
+
+        //创建矢量图层-全国范围
+        var areaLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'http://192.168.0.252:8090/geoserver/core/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=core%3AREGION_NATION_RANGE&maxFeatures=50&outputFormat=application%2Fjson',
+                format: new ol.format.GeoJSON(),
+            }),
+            style: styleBase
+        })
+
+        var styleNation = new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: '#1EE0FF',
+                width: 1
+            }),
+            //把点的样式换成ICON图标
+            fill: new ol.style.Fill({
+                //填充颜色
+                color: '#0D2B55'
+            }),
+            text: new ol.style.Text({
+                // 字体与大小
+                font: '13px Microsoft YaHei',
+                //文字填充色
+                fill: new ol.style.Fill({
+                    color: '#fff'
+                }),
+                //文字边界宽度与颜色
+                stroke: new ol.style.Stroke({
+                    color: '#000',
+                    width: 3
+                })
+            })
+        });
+        //创建矢量图层-省级范围
+        var nationLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'http://192.168.0.252:8090/geoserver/core/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=core%3AREGION_NATION&maxFeatures=50&outputFormat=application%2Fjson',
+                format: new ol.format.GeoJSON(),
+            }),
+            style: function (feature, resolution) {
+                console.log(feature.values_);
+                styleNation.getText().setText(feature.values_.NL_NAME_1);  //当放大到1:5000分辨率时，显示国家名字
+                return [styleNation];
+            }
+        })
+
+
+        // var r3D = new ol.render3D({ height:10, defaultHeight:3.5 });
+        // nationLayer.setRender3D(r3D);
+
+
+        //交互控件
+        var interaction = new ol.interaction.DragRotateAndZoom();
+        var interactions = new ol.interaction.defaults().extend([interaction]);
+        map = new ol.Map({
+            target: "map",
+            layers: [areaLayer, nationLayer],
+            view: view,
+            //interactions: interactions
+        });
+        //地图控件
+        var controlFullScreen = new ol.control.FullScreen();
+        map.addControl(controlFullScreen);
+        // //旋转特效
+        // var viewAnimate = map.getView();
+        // viewAnimate.animate({
+        //     rotation: viewAnimate.getRotation() + Math.PI / 2
+        // });
+        // //放大缩小
+        // var zoom = new ol.control.Zoom();
+        // map.addControl(zoom);
+        // //比例尺
+        // var scaleControl = new ol.control.ScaleLine({
+        //     //设置比例尺单位，degrees、imperial、us、nautical、metric（度量单位）
+        //     units: "metric"
+        // });
+        // map.addControl(scaleControl);
+
+
+        //var rotateControl = new ol.control.Rotate();
+        //map.addControl(rotateControl);
+
+
+        //注册点击元素事件
+        var selectClick = new ol.interaction.Select({
+            condition: ol.events.condition.click
+        });
+
+        //map.addInteraction(selectClick);
+        map.on('click', function (evt) {
+
+            console.log(evt);
+            //绑定监听主要代码
+            var pixel = map.getEventPixel(evt.originalEvent);
+            var feature = map.forEachFeatureAtPixel(pixel, function (feature, layer) {
+                return feature;
+            });
+            console.log(feature);
+            var jsonData = feature.values_;
+            var showData = "";
+            showData+="feature.id_:"+feature.id_;
+            for (var key in jsonData) {
+                if (showData != "") {
+                    showData += "\r\n";
+                }
+                if (key != "geometry") {
+                    showData += key + ':' + jsonData[key];
+                }
+            }
+
+            alert("你点击的元素最基本数据信息是：\r\n" + showData);
+            if(feature.id_==undefined){
+                return;
+            }
+            if (feature.id_.startsWith("REGION_NATION.")) {//点击省级区划 加载区划下所有政务大厅信息
+                loadAllZwdt(feature.id_);
+            }else if (feature.id_.startsWith("WINDOW_LOCATION.")) {//点击政务大厅 加载政务大厅信息
+                loadZwdtInfo(feature.values.ST_AREA_ID);
+            }
+        });
+    }
+
+    //加载政务大厅信息展示页面
+    function loadZwdtInfo(id){
+        console.log(id);
+        if(id=="zwdt_0001"){
+            location.href="file:///D:/GitHub/GisDataDisplay/index.html";
+        }
+    }
+    
+
+    //加载政务大厅列表
+    function loadAllZwdt(id) {
+        var html = "<ul>";
+        for (var i = 0; i < jsonZwData.data.length; i++) {
+            if (jsonZwData.data[i].id == id) {
+                var data = jsonZwData.data[i].list;
+                //console.log(data);
+                for (var j = 0; j < data.length; j++) {
+                    html += "<li>"
+                        + "<span>" + (j + 1) + "</span>"
+                        + "<span onclick=\"loadZwdtInfo('"+data[j].id+"')\">" + data[j].name + "</span>"
+                        + "</li>";
+                }
+                break;
+            }
+
+        }
+        html += "</ul";
+        $(".right-body .top5-ul").html(html);
+    }
+
+    //加载政务大厅数量
+    function loadAllZwdtCount(){
+        var html = "<ul>";
+        for (var i = 0; i < jsonZwData.data.length; i++) {
+            var len = jsonZwData.data[i].list.length;
+            html += "<li>"
+                        + "<span>" + (i + 1) + "</span>"
+                        + "<span  onclick=\"loadAllZwdt('"+jsonZwData.data[i].id+"')\">" + jsonZwData.data[i].name + "</span>"
+                        + "<span>" + len + "</span>"
+                        + "</li>";
+            
+
+        }
+        html += "</ul";
+        console.log(html);
+        $(".left-body .top5-ul").html(html);
+    }
+
+</script>
 <script>
     //顶部时间
-    function getTime(){
+    function getTime() {
         var myDate = new Date();
         var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
-        var myMonth = myDate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+        var myMonth = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
         var myToday = myDate.getDate(); //获取当前日(1-31)
         var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
         var myHour = myDate.getHours(); //获取当前小时数(0-23)
         var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
         var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
-        var week = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+        var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
         var nowTime;
 
-        nowTime = myYear+'年'+fillZero(myMonth)+'月'+fillZero(myToday)+'日'+'&nbsp;&nbsp;'+fillZero(myHour)+':'+fillZero(myMinute)+':'+fillZero(mySecond)+'&nbsp;&nbsp;'+week[myDay]+'&nbsp;&nbsp;';
+        nowTime = myYear + '年' + fillZero(myMonth) + '月' + fillZero(myToday) + '日' + '&nbsp;&nbsp;' + fillZero(myHour) + ':' + fillZero(myMinute) + ':' + fillZero(mySecond) + '&nbsp;&nbsp;' + week[myDay] + '&nbsp;&nbsp;';
         //console.log(nowTime);
         $('#time').html(nowTime);
     };
-    function fillZero(str){
+    function fillZero(str) {
         var realNum;
-        if(str<10){
-            realNum	= '0'+str;
-        }else{
-            realNum	= str;
+        if (str < 10) {
+            realNum = '0' + str;
+        } else {
+            realNum = str;
         }
         return realNum;
     }
-    setInterval(getTime,1000);
+    setInterval(getTime, 1000);
 </script>
