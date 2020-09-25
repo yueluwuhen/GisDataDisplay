@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<title>滨州市行政服务中心</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="height=device-height,width=device-width,initial-scale=1,minimum-scale=0.2,maximum-scale=2,user-scalable=yes" />
+		<link rel="stylesheet" href="css/index.css" type="text/css"></link>
+	</head>
+	<body style="overflow: hidden">	
+		<div class="container">
+			<div class="centerall">
+				<p class="title mb20">全中心</p>
+				<!-- <div class="chief mr20 mb20">
+					<img id="photo" onerror="this.src=''" />
+					<ul>
+						<li>今日值班长</li>
+						<li><span class="chief-left">姓&nbsp;名：</span><span class="chief-name"></span></li>
+						<li><span class="chief-left">工&nbsp;号：</span><span class="chief-no"></span></li>
+						<li><span class="chief-left">电&nbsp;话：</span><span class="chief-tel"></span></li>
+					</ul>
+				</div> -->
+				<div class="services-matter mr20 mb20">
+					<span id="services-name">政务服务事项</span>
+					<p class="light-blue" id="services-num"></p>		
+				</div>
+				<div class="approval-matter mb20">
+					<span id="approval-name">便民服务事项</span>
+					<p class="light-yellow" id="approval-num"></p>		
+				</div>
+				<div class="all-windows mr20 mb20">
+					共设窗口
+					<p class="light-blue" id="all-windows"></p>	
+				</div>
+				<div class="open-windows mb20">
+					入驻人员
+					<p class="light-yellow" id="open-windows"></p>
+				</div>
+				<div class="handle-advisory-chart mb20">
+					<div id="handle-advisory-chart"></div>
+				</div>
+				<div class="today-handle mb20 mr20">
+					今日办理量&nbsp;&nbsp;
+					<span class="light-blue" id="today-handle"></span>
+				</div>
+				<div class="today-advisory mb20">
+					总办理量&nbsp;&nbsp;
+					<span class="light-yellow" id="all-handle"></span>
+				</div>
+				<div class="today-reception mr20">
+					今日叫号人数&nbsp;&nbsp;
+					<span class="light-blue" id="today-reception"></span>
+				</div>
+				<div class="all-reception">
+					总叫号人数&nbsp;&nbsp;
+					<span class="light-yellow" id="all-reception"></span>
+				</div>
+			</div>
+			<div class="hall-reception">
+				<div class="title mb20">各区域接待情况</div>
+				<div class="floor_num">
+					<span id="first-floor">一层</span>
+					<span id="two-floor">二层</span>
+					<span id="third-floor">三层</span>
+				</div>
+				<table class="window-reception" border="0" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th width="260">窗口服务区域</th>
+							<!-- <th>
+								< img src="img/leader.png" width="50" height="55" /><br/>
+								值班长
+							</th> -->
+							<th width="200">
+								<img src="img/wait-time.png" width="60" height="60" /><br/>
+								平均等待时长
+							</th>
+							<th>
+								<img src="img/wait-people.png" width="53" height="65" /><br/>
+								等待人数
+							</th>
+							<th>
+								<img src="img/satisfaction.png" width="60" height="60" /><br/>
+								满意度
+							</th>
+							<th>
+								<img src="img/office.png" width="64" height="58" /><br/>
+								今日办件量
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div class="map webgl-content">
+				<div class="title mb20">楼层</div>
+				<div class="floor_num">
+					<span id="first-floor">一层</span>
+					<span id="two-floor">二层</span>
+					<span id="third-floor">三层</span>
+				</div>
+				<!--  Build/index.html  -->
+				<iframe id="map" name="map" src="../zwdt_0001/Build/index.html" frameborder="0" height="100%" width="100%" scrolling="no"></iframe>
+			</div>
+			<div class="hall-wait" id="hallcodes-reception">
+				<div class="title mb20">服务人数</div>
+				<div id="today-acception-chart"></div>
+			</div>
+			<div class="hall-wait" id="hallcode-reception" style="display: none">
+				<div class="title mb20">&nbsp;&nbsp;&nbsp;&nbsp;<span class="hallcode"></span>厅今日接待情况</div>
+				<div class="reception-chart mr20">
+					<div class="reception-chart-title">
+						今日叫号人数&nbsp;<span class="light-yellow today-reception-people"></span>人&nbsp;&nbsp;
+						总叫号人数&nbsp;<span class="light-blue all-reception-people"></span>人
+					</div>
+					<div id="reception-chart"></div>
+				</div>
+				<div class="hall-wait-right">
+					<div class="h-wait-time mb20">
+						<dl>
+							<dt><img src="img/time.png" /></dt>
+							<dd class="first-dd">平均等待时长：<span class="avg-wait-time"></span></dd>
+							<dd id="wait-time-matter"></dd>
+						</dl>
+					</div>
+					<div class="h-wait-time mb20">
+						<dl>
+							<dt><img src="img/queue.png" /></dt>
+							<dd class="first-dd">等待人数：<span class="avg-wait-people"></span></dd>
+							<!-- <dd>大厅内较为&nbsp;<span class="avg-wait-status"></span>，请听从工作人员的安排</dd> -->
+						</dl>
+					</div>
+					<div class="h-wait-time mb20">
+						<dl>
+							<dt><img src="img/handle.png" /></dt>
+							<dd class="first-dd">平均办理时长：<span class="avg-handle-time"></span></dd>
+							<dd id="avg-handle-office"></dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="hall-wait" id="windowNo-reception" style="display: none">
+				<div class="title mb20"><span class="windowNo">B10</span>窗口情况</div>
+				<div class="window-duty mr20">
+					<dl>
+						<dt id="windowNo_photo"></dt>
+						<dd class="title" id="windowNo-title"></dd>
+						<dd><span class="chief-left">姓&nbsp;名：</span><span class="windowNo-name"></span></dd>
+						<dd><span class="chief-left">工&nbsp;号：</span><span class="windowNo-number"></span></dd>
+						<!-- <dd><span class="chief-left">电&nbsp;话：</span><span class="windowNo-tel">121212</span></dd> -->
+					</dl>
+				</div>
+				<div class="windowNo-matter mr20">
+					<p class="windowNo-matter-title">窗口可办事项</p>
+					<div class="windowNo-matter-name">
+						<ul>
+						</ul>
+					</div>
+				</div>
+				<div class="windowNo-num">
+					<div class="h-wait-time1 mb20">
+						<dl>
+							<dt><img src="img/time.png" /></dt>
+							<dd>当前窗口等待人数：<span class="light-yellow" id="windowNo-wait-people">约22分钟</span></dd>
+						</dl>
+					</div>
+					<div class="h-wait-time1 mb20">
+						<dl>
+							<dt><img src="img/queue.png" /></dt>
+							<dd>当前平均等待时间：<span class="light-yellow" id="windowNo-wait-time"></span></dd>
+						</dl>
+					</div>
+					<div class="h-wait-time1 mb20">
+						<dl>
+							<dt><img src="img/handle.png" /></dt>
+							<dd>今日已叫号人数：<span class="light-yellow" id="windowNo-accept-people"></span></dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="month-average-office-top10">
+				<div class="title mb20">月办件量(TOP10)</div>
+				<div id="month-average-office-top10-chart"></div>
+			</div>
+			<div class="month-average-office-time-top10">
+				<div class="title mb20">月平均办件时长(TOP10)</div>
+				<div id="month-average-office-time-top10-chart"></div>
+			</div>
+			<div class="wait-time">
+				<div class="title mb20">等待时长</div>
+				<div id="wait-time-chart"></div>
+			</div>
+			<div class="satisfaction">
+				<div class="title mb20">满意度</div>
+				<div id="satisfaction-chart"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="resources/jquery/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="resources/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="resources/common/common.js"></script>
+	<script type="text/javascript" src="js/index1.js"></script>
+	<script src="../ol/ol.js"></script>
+	<script src="../data/data.js"></script>
+	<script src="../js/common.js"></script>
+	<script type="text/javascript">
+		var ww = "0.27" , hh = "0.27";
+		$("body").css({"transform":"scale("+ww+","+hh+")","transform-origin":"top left"});
+		//var webRoot = "/ac-screen";
+		var webRoot = "http://172.30.122.163:8060/ac-screen";	
+		var currFloor=0;
+		var zwdtId="zwdt_0001";	
+		loadFloorList(1);
+		function loadFloorList(nFloor){
+			currFloor=nFloor;
+			var floorList=getZwdtProperty(jsonZwData,zwdtId,"floorlist");
+			if(currFloor<1){
+				currFloor=floorList[0];
+			}
+			var html="";
+			for(var i=0;i<floorList.length;i++){
+				if(currFloor==floorList[i]){
+					html+="<span class='active' id='floor-"+floorList[i]+"'>"+floorList[i]+"层</span>";
+				}else{
+					html+="<span onclick=\"loadFloorList('"+floorList[i]+"');\" id='floor-"+floorList[i]+"'>"+floorList[i]+"层</span>";
+				}
+			}
+			$(".floor_num").html(html);
+		}
+		window.onload=function(){
+			console.log("开始加载地图信息...");
+			console.log(window.frames);
+			$("#map")[0].contentWindow.test("啦啦啦！！！");
+			document.getElementById('map').contentWindow.initMap(zwdtId,currFloor);
+		}
+		// map中显示数据
+		var mapData = function(){
+			var hallData = ["bzf001a","bzf001b","bzf001z","bzf002c","bzf002d","bzf002e","bzf002f","bzf002g","bzf002h","bzf003k"];	// "bzf003j", 
+			var tt = [] , ee = [] , currentIndex = 0 , currentIndex2 = 0; 
+			getD();
+			function getD(){
+				if(currentIndex >= hallData.length){
+					return 
+				}
+				$.ajax({
+					type : "get",
+					dataType: "jsonp",
+					jsonp: "jsonpCallback",
+					url: webRoot+"/aci/running/getApplyPerson.do?hallCodes="+hallData[currentIndex],
+					success : function(json) {
+						//var json = eval('(' + data + ')');	
+						allD(json.todayCount+"-t","c-c");		// 今日接待人数
+						currentIndex ++;	
+						getD();
+					}
+				});
+			}
+			getC();
+			function getC() {
+				if(currentIndex2 >= hallData.length){
+					return 
+				}
+				$.ajax({
+					type : "get",
+					dataType: "jsonp",
+					jsonp: "jsonpCallback",
+					url: webRoot+"/aci/running/getCGHallDetails.do?hallCode="+hallData[currentIndex2],
+					success : function(json) {
+						//var json = eval('(' + data + ')');	
+						allD("t-t",json.hallEtcNumber+"-c");		// 当前等待人数
+						currentIndex2 ++ ;
+						getC();
+					}
+				});
+			}
+		};
+		var aa = [] , bb = [] , h = ["A","B","Z","C","D","E","F","G","H","J","K"] , c_aa = [] , c_bb = [];
+		function allD(a,b){
+			var a1 = a.split("-")[0];
+			aa.push(a1);
+			var b1 = b.split("-")[0];
+			bb.push(b1);
+			c_aa = changeD(aa,"t");
+		 	c_bb = changeD(bb,"c");
+		 	if(c_aa != undefined){
+		 		if(c_aa.length == 11){
+			 		for(var n in h){
+						mm(h[n]+','+c_aa[n]+','+c_bb[n]);
+					}
+			 	}
+		 	}
+		}
+		function mm(c){
+			document.getElementById("map").contentWindow.gameInstance.SendMessage("MainCamera","SetCube",c);
+		}
+		function changeD(aa,falg){
+			if(aa.length == 22){
+				var a = [];
+				for (var i = 0; i < aa.length; i++) {
+					if (aa[i] == falg){
+						a.push(i);
+					}
+				}
+				for(var i=0;i<a.length;i++){
+					delete aa[a[i]];
+				}
+				return filter_array(aa);
+			}
+		}
+		function filter_array(array) {    
+		  	return array.filter(item=>item);   
+		}
+		
+		// 单窗口数据
+		function mapWindowNo(windowNo){
+			$("#hallcodes-reception").hide();
+			$("#hallcode-reception").hide();
+			$("#windowNo-reception").show();
+			$(".windowNo").html(windowNo);
+			// 左列
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/led/getWindowUser.do?windowNo="+windowNo,
+				success : function(data) {
+					//var data = eval('(' + json + ')');
+					var src_p = "";
+					if(data.id){
+						src_p = webRoot+"/user/userImage.do?userId="+data.id;
+						$("#windowNo_photo").html("<img src='"+src_p+"' />");
+					}else{
+						$("#windowNo_photo").html("关<br/>闭");
+					}
+					$(".windowNo-name").html(filterValue(data.username,""));
+					$(".windowNo-number").html(filterValue(data.jobnumber,""));
+				},
+			    error : function() {
+				}
+			});
+			// 中间
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/led/getAcceptPeopleOfWindow.do?windowNo="+windowNo,
+				success : function(data) {
+					//var data = eval('(' + json + ')');
+					var list = "";
+					if(data.itemList.length > 0){
+						for(var i=0; i<data.itemList.length;i++){
+							list += "<li><span class='subscript'>"+parseInt(i+1)+"、&nbsp;</span>"+data.itemList[i].itemName+"</li>"
+						}
+					}else{
+						list = "暂无可办事项";
+					}
+					$(".windowNo-matter-name ul").html(list);
+					$("#windowNo-wait-time").html("约"+filterValue(data.avgwait,"0")+"分钟");
+					$("#windowNo-accept-people").html(filterValue(data.acceptCount,"0")+"人次");
+				},
+			    error : function() {
+				}
+			});
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/led/getLoginWindowInfo.do?windowNo="+windowNo,
+				success : function(data) {
+					//var data = eval('(' + json + ')');
+					$("#windowNo-title").html(data.stWindowName);
+					$("#windowNo-wait-people").html("约"+filterValue(data.nmWaitCount,"0")+"人");
+				},
+			    error : function() {
+				}
+			});
+		}
+		
+		// 中上  地图
+		function map(name){
+			if(name == "None"){		// 单大厅
+				$("#hallcodes-reception").show();
+				$("#hallcode-reception").hide();
+				$("#windowNo-reception").hide();
+				showHallWait();
+			}else if(name){			// 总大厅
+				$("#hallcode-reception").show();
+				$("#hallcodes-reception").hide();
+				$("#windowNo-reception").hide();
+				var hall = "";
+				switch (name){
+					case "A":
+						hall = "bzf001a";
+						break;
+					case "B":
+						hall = "bzf001b";
+						break;
+					case "Z":
+						hall = "bzf001z";
+						break;
+					case "C":
+						hall = "bzf002c";
+						break;
+					case "D":
+						hall = "bzf002d";
+						break;
+					case "E":
+						hall = "bzf002e";
+						break;
+					case "F":
+						hall = "bzf002f";
+						break;
+					case "G":
+						hall = "bzf002g";
+						break;
+					case "H":
+						hall = "bzf002h";
+						break;
+					case "J":
+						hall = "bzf003j";
+						break;
+					case "K":
+						hall = "bzf003k";
+						break;
+				}
+				showReception(name,hall);
+			}
+		};
+		// 各大厅今日接待情况
+		var showReception = function(name,hallCode) {
+			$("#hallcode-reception").find(".hallcode").html(name);
+			// 接待人数数据
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getApplyPerson.do?hallCodes="+hallCode,
+				success : function(json) {
+					//var json = eval('(' + data + ')');			
+					$(".today-reception-people").text(filterValue(json.todayCount,"0"));				
+					$(".all-reception-people").text(filterValue(json.allCount,"0"));
+				},
+			    error : function() {
+				}
+			});
+			// 接待人数图表
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getTodayApplyPerson.do?hallCodes="+hallCode,
+				success : function(json) {
+					//var json = eval('(' + data + ')');			
+					var xArray=[] , yArray=[];
+					for(var i=0;i<json.banli.length;i++){
+						xArray[i]=json.banli[i].date;
+						yArray[i]=json.banli[i].count;
+					}
+					drawReceptionChart("reception-chart",xArray,yArray);
+				},
+			    error : function() {
+				}
+			});
+			// 右侧数据
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getCGHallDetails.do?hallCode="+hallCode,
+				success : function(data) {
+					//var data = eval('(' + json + ')');			
+					// 平均等待时长
+					$(".avg-wait-time").html("约"+filterValue(data.hallAvg,0)+"分钟").css("color",data.hallAvgColor);
+					var wtm = "";
+					if(data.hallWindowAvg.length>1){
+						var stWindowName = data.hallWindowAvg[0].stWindowName.length > 5 ? data.hallWindowAvg[0].stWindowName.slice(0,4)+"..." : data.hallWindowAvg[0].stWindowName;
+						wtm += stWindowName+"：<span class='light-yellow'>约"+data.hallWindowAvg[0].stAvgEtcTime
+							+"分钟</span>&nbsp;&nbsp;"+stWindowName+"：<span class='light-yellow'>约"
+							+data.hallWindowAvg[1].stAvgEtcTime+"分钟</span>";
+					}
+					//$("#wait-time-matter").html(wtm);
+					// 等候人数
+					$(".avg-wait-people").html("约"+filterValue(data.hallEtcNumber,0)+"人").css("color",data.hallEtcNumberColor);
+					$(".avg-wait-status").html(filterValue(data.hallStatus,"")).css("color",data.hallEtcNumberColor);
+					// 平均办理时长
+					$(".avg-handle-time").html("约"+filterValue(data.hallAvgDealTime,"0")+"分钟").css("color",data.hallAvgDealTimeColor);
+					var aho = "";
+					if(data.cGItemInfoList.length >= 1){
+						var itemName = data.cGItemInfoList[0].itemName.length > 5 ? data.cGItemInfoList[0].itemName.slice(0,4)+"..." : data.cGItemInfoList[0].itemName;
+						aho += itemName+"：<span style='color: "+data.cGItemInfoList[0].dealTimeColor+"'>约"
+							+data.cGItemInfoList[0].dealTime+"分钟</span>&nbsp;&nbsp;"+itemName
+							+"：<span style='color: "+data.cGItemInfoList[1].dealTimeColor+"'>约"+data.cGItemInfoList[1].dealTime+"分钟</span>";
+					}
+					//$("#avg-handle-office").html(aho);
+				},
+			    error : function() {
+				}
+			});
+		};
+		//showReception("","cgf001c");
+		// 左上
+		var showHandleChart = function() {
+			 // 显示值班长信息
+		/*	 $.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getOnDutyPeople.do?hallCodes=%<=allHall%>",
+				success : function(json) {
+					//var json = eval('(' + data + ')');		
+					var imgs=filterValue(json[0].user.stUserReportImageUrl,"");
+					var pho="";
+					if(imgs)
+						pho=webRoot+imgs;
+					$("#photo").attr("src",pho);
+					$(".chief-name").html(filterValue(json[0].user.stUserReport,""));
+					$(".chief-no").html(filterValue(json[0].user.stUserNumber,""));
+					$(".chief-tel").html(filterValue(json[0].user.stHallMobile,""));
+				},
+			    error : function() {
+			    	console.log("getOnDutyPeople error");
+				}
+			}); */
+			// 服务事项  审批事项 等信息
+			$.ajax({
+				type:"get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url:webRoot+"/aci/running/getAllMatters.do?hallCodes=bzf001a,bzf001b,bzf001z,bzf002c,bzf002d,bzf002e,bzf002f,bzf002g,bzf002h,bzf003j,bzf003k",
+				success:function(json){
+					//$("#services-name").html(filterValue(json.matters[0].name),"政务服务事项");
+					$("#services-num").html(1093);		// 滨州修改
+					//$("#approval-name").html(filterValue(json.matters[1].name,"便民服务事项"));
+					//$("#approval-num").html(filterValue(json.matters[1].value,"0"));
+					$("#approval-num").html(133);		// 滨州修改
+					//$("#all-windows").html(filterValue(json.windowSize,0));
+                    $("#all-windows").html(131);		// 滨州修改
+					$("#open-windows").html(562);		// 滨州修改
+				},
+				error:function(){
+					console.log("getAllMatters error");
+				},
+			});
+			// 今日办理量  今日咨询量
+			 $.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				//url : webRoot+"/aci/running/getAllApplyCount.do?hallCode=<=hallCodes%>",
+				url : webRoot+"/aci/running/getAllApplyCount.do?hallCodes=",
+				success : function(json) {
+					//var json = eval('(' + data + ')');		
+					var total_handle = parseInt(json.allCount)+parseInt(json.zxallCount);
+					$("#today-handle").text(total_handle);
+					var xArray=[] , yArray=[] , yArray2=[];
+					for(var i=0;i<json.zixun.length;i++){
+						xArray[i]=json.zixun[i].date;
+						yArray2[i]=json.zixun[i].count;
+					}
+					for(var i=0;i<json.banli.length;i++){
+						yArray[i]=json.banli[i].count;
+					}
+					showHandleEchart("handle-advisory-chart",xArray,yArray,yArray2);
+				},
+			    error : function() {
+			    	console.log("getAllApplyCount error");
+				}
+			});
+			// 今日接待人数  总接待人数
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getApplyPerson.do?hallCodes=bzf001a,bzf001b,bzf001z,bzf002c,bzf002d,bzf002e,bzf002f,bzf002g,bzf002h,bzf003j,bzf003k",
+				success : function(json) {
+					//var json = eval('(' + data + ')');			
+					$("#today-reception").text(filterValue(json.todayCount,"0"));
+					$("#all-reception").text(filterValue(json.allCount,"0"));
+				},
+			    error : function() {
+			    	console.log("getApplyPerson error");
+				}
+			});
+		};
+		// 左下
+		var showWindowReception = function(hall) {
+			$.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url:webRoot+"/aci/running/getAllData.do?hallCodes="+hall,
+				success : function(json) {
+					//var json = eval('(' + data + ')');		
+					var html = "" , wait = "";
+					for(var i=0; i<json.length; i++){
+						if(!isEmptyObject(json[i].hallWindowAvg)){
+							wait = json[i].hallWindowAvg[0].stWindowName+"<br/>约&nbsp;<span class='light-yellow'>"+json[i].hallWindowAvg[0].stAvgEtcTime+"</span>&nbsp;分钟";
+						}
+						html += "<tr id='"+json[i].hallCode+"'><td id='hall-name'><span>"+json[i].hallInfo.alpha+"区</span><br/>"+json[i].hallInfo.fullName.slice(0,8)+"</td><td id='hall-wait'>"+
+							wait+"</td><td><span class='light-yellow' id='wait-people'>"+json[i].hallEtcNumber+"</span>&nbsp;人"+
+							"</td><td class='light-blue' id='satis'>"+json[i].hallSatisfation+"</td><td><span class='light-blue' id='today-office'>"+json[i].todayCount+
+							"</span>&nbsp;件</td></tr>";
+					}	
+					$(".window-reception tbody").html(html);
+				},
+			    error : function() {
+			    	console.log("getAllData error");
+				}
+			});
+			setTimeout(function() {
+				showWindowReception(hall);
+			},1000*40);
+		};
+		showWindowReception("bzf001a,bzf001b");	// ,bzf001z
+		$("#first-floor").click(function(){
+			var h1 = "bzf001a,bzf001b";		// ,bzf001z
+			showWindowReception(h1);
+		});
+		$("#two-floor").click(function(){
+			var h2 = "bzf002c,bzf002d,bzf002e,bzf002f,bzf002g,bzf002h";
+			showWindowReception(h2);
+		});
+		$("#third-floor").click(function(){
+			var h3 = "bzf003k";		// bzf003j,
+			showWindowReception(h3);
+		});
+		// del empty
+		Array.prototype.removeEmpty = function(arr) {
+			for(var i=0; i<arr.length; i++) {
+				if(arr[i] == undefined || arr[i] == null) {
+					arr.splice(i,1);
+					i = i-1;
+				}
+			}
+			return arr
+		};
+		// 中下
+		var showHallWait = function() {
+			 // 今日各大厅接待人数
+			 $.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getCGHallPeopleDetail.do?hallCodes=bzf001a,bzf001b,bzf001z,bzf002c,bzf002d,bzf002e,bzf002f,bzf002g,bzf002h,bzf003j,bzf003k",
+				success : function(data) {
+					//var data = eval('(' + json + ')');			
+					var xArray=[] , yArray=[] , yArray2=[];	
+					for(var i=0; i<data.length; i++){
+						if(data[i].hallCode == "bzf003j") {
+						} else if(data[i].hallCode == "bzf001z") {
+						} else {
+							xArray[i] = data[i].hallName;
+							yArray[i] = data[i].waitNum;
+							yArray2[i] = data[i].admitNum;
+						}
+					}
+					xArray = xArray.removeEmpty(xArray);
+					yArray = yArray.removeEmpty(yArray);
+					yArray2 = yArray2.removeEmpty(yArray2);
+					showHallWaitEchart("today-acception-chart",xArray,yArray,yArray2);
+				},
+			    error : function() {
+			    	console.log("getAllApplyCount error");
+				}
+			});
+		};
+		// 右侧
+		var showAverageOffice = function() {
+			// 月平均办件量top10
+			 $.ajax({
+				type : "get",
+				dataType: "jsonp",
+				jsonp: "jsonpCallback",
+				url : webRoot+"/aci/running/getBzHallDetailInfo.do?hallCodes=bzf001a,bzf001b,bzf001z,bzf002c,bzf002d,bzf002e,bzf002f,bzf002g,bzf002h,bzf003j,bzf003k",
+				success : function(data) {
+					//var data = eval('(' + json + ')');
+					$("#all-handle").html(data.allApplyNum);		
+					// 右上  月平均办件量top10					
+					var xArray=[] , yArray=[];
+					for(var i=0; i<data.itemApplyNumlist.length; i++){
+						//xArray[i] = data.windowApplyNumlist[i].stWindowNo+" "+data.windowApplyNumlist[i].stWindowName;
+						var itemName = data.itemApplyNumlist[i].itemName;
+						if(itemName.length > 6)
+							itemName = itemName.substring(0,6)+"...";
+						xArray[i] = itemName; 
+						//yArray[i] = data.windowApplyNumlist[i].avgApplyNum;
+						yArray[i] = data.itemApplyNumlist[i].applyNum;
+					}
+					xArray = xArray.reverse();
+					yArray = yArray.reverse();
+					showAverageOfficeEchart("month-average-office-top10-chart",xArray,yArray);	
+					//  右中   月平均办件时长top10
+					var t_x_array = [] , t_y_array = [];
+					for(var i=0; i<data.windowApplyTimelist.length; i++){
+						t_y_array[i] = data.windowApplyTimelist[i].avgApplyTime;
+						t_x_array[i] = data.windowApplyTimelist[i].stWindowNo+" "+data.windowApplyTimelist[i].stWindowName;
+					}
+					t_x_array = t_x_array.reverse();
+					t_y_array = t_y_array.reverse();
+					showAverageOfficeTimeEchart("month-average-office-time-top10-chart",t_x_array,t_y_array);
+					// 右下左   等待时长
+					var array=[
+						{value: data.waitTimeinterval.oneWaitTime, name: "0-10"},
+						{value: data.waitTimeinterval.twoWaitTime, name: "10-20"},
+						{value: data.waitTimeinterval.threeWaitTime, name: "20-30"},
+						{value: data.waitTimeinterval.fourWaitTime, name: ">30"}
+					];					
+					showWaitTimeEchart("wait-time-chart",array);
+					// 右下右   满意度
+				
+					// var s_array=[
+					// 	{value: "99.01", name: "非常满意"},
+					// 	{value: "0.79", name: "满意"},
+					// 	{value: "0.1", name: "基本满意"},
+					// 	{value: "0.1", name: "不满意"},
+					// 	{value: "0.0", name: "非常不满意"},
+					// ];
+					
+
+					var s_array=[
+						{value: data.cGSatisfation.feichangmanyiCount, name: "非常满意"},
+						{value: data.cGSatisfation.manyiCount, name: "满意"},
+						{value: data.cGSatisfation.yibanCount, name: "基本满意"},
+						{value: data.cGSatisfation.bumanyiCount, name: "不满意"},
+						{value: data.cGSatisfation.feichangbumanyiCount, name: "非常不满意"},
+					];
+					showSatisfactionEchart("satisfaction-chart",s_array);
+				},
+			    error : function() {
+			    	console.log("getAllApplyCount error");
+				}
+			});
+		};
+		
+		var allShowInfo = function() {
+			showHandleChart();
+			showHallWait();  
+			showAverageOffice(); 
+		};
+		allShowInfo();
+		window.setInterval("allShowInfo()", 1000*40);
+		window.setInterval("mapData()", 1000*40);		// 显示地图中各区的柱状图
+		setTimeout(function(){location.reload()},1000*60*60); // 指定1小时刷新一次页面	
+		
+		
+	</script>
+</html>
